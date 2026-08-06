@@ -157,8 +157,11 @@
   --component-footer-bg: var(--semantic-color-secondary);
   --component-footer-fg: var(--semantic-color-secondary-foreground);
 
-  /* Hero */
+  /* Hero — dark media background, so text needs light tints of the
+     brand families rather than the base navy/gold used on light surfaces */
   --component-hero-padding-y: var(--primitive-space-9);
+  --component-hero-title-color: var(--primitive-navy-50);
+  --component-hero-eyebrow-color: var(--primitive-gold-100);
 
   /* Form input (contact form) */
   --component-input-border: var(--semantic-color-border);
@@ -195,6 +198,9 @@
   --radius-button: var(--component-button-radius);
   --radius-card: var(--component-card-radius);
   --radius-input: var(--component-input-radius);
+
+  --color-hero-title: var(--component-hero-title-color);
+  --color-hero-eyebrow: var(--component-hero-eyebrow-color);
 
   --spacing-section: var(--semantic-space-section-y);
   --spacing-content-gap: var(--semantic-space-content-gap);
