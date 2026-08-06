@@ -1,15 +1,31 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { EB_Garamond, Lato, Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Heading typeface — EB Garamond (Latin authority serif) + Noto Serif JP (Japanese counterpart)
+const ebGaramond = EB_Garamond({
+  variable: "--font-eb-garamond",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const notoSerifJP = Noto_Serif_JP({
+  variable: "--font-noto-serif-jp",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+// Body typeface — Lato (Latin) + Noto Sans JP (Japanese counterpart)
+const lato = Lato({
+  variable: "--font-lato",
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+});
+
+const notoSansJP = Noto_Sans_JP({
+  variable: "--font-noto-sans-jp",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -20,8 +36,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="ja"
+      className={`${ebGaramond.variable} ${notoSerifJP.variable} ${lato.variable} ${notoSansJP.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

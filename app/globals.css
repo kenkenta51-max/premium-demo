@@ -43,9 +43,13 @@
   /* Color — Status (form/system feedback) */
   --primitive-red-600: #dc2626;
 
-  /* Typography — font families */
-  --primitive-font-serif: "EB Garamond", "Noto Serif JP", serif;
-  --primitive-font-sans: "Lato", "Noto Sans JP", sans-serif;
+  /* Typography — font families
+     Actual font loading happens via next/font in app/layout.tsx, which
+     injects --font-eb-garamond / --font-noto-serif-jp / --font-lato /
+     --font-noto-sans-jp on <html>. These primitives just compose the
+     fallback stacks; they resolve to nothing until layout.tsx is rendered. */
+  --primitive-font-serif: var(--font-eb-garamond), var(--font-noto-serif-jp), serif;
+  --primitive-font-sans: var(--font-lato), var(--font-noto-sans-jp), sans-serif;
 
   /* Typography — type scale (min body size 16px per brief) */
   --primitive-text-xs: 0.875rem;   /* 14px — labels/captions only, never body */
