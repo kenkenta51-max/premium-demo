@@ -1,26 +1,216 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   Lumière Design Tokens
+   3-layer architecture: Primitive → Semantic → Component
+   Tailwind v4 is CSS-first, so tokens live here (no tailwind.config needed).
+   Values not exposed in @theme are internal references only.
+   ========================================================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ------------------------------------------------------------------
+     Layer 1: PRIMITIVE — raw values, no meaning attached
+     ------------------------------------------------------------------ */
+
+  /* Color — Navy (primary family) */
+  --primitive-navy-50: #eef2fb;
+  --primitive-navy-100: #dce4f5;
+  --primitive-navy-300: #6b85c4;
+  --primitive-navy-600: #2c4a9e;
+  --primitive-navy-700: #1e3a8a;
+  --primitive-navy-900: #14265c;
+  --primitive-navy-950: #0f172a;
+
+  /* Color — Charcoal (secondary / neutral-cool family) */
+  --primitive-charcoal-50: #f1f3f6;
+  --primitive-charcoal-200: #cbd5e1;
+  --primitive-charcoal-400: #64748b;
+  --primitive-charcoal-700: #334155;
+  --primitive-charcoal-800: #1e293b;
+  --primitive-charcoal-950: #0f172a;
+
+  /* Color — Gold (accent family, used sparingly) */
+  --primitive-gold-100: #fdecd3;
+  --primitive-gold-400: #d97706;
+  --primitive-gold-600: #b45309;
+  --primitive-gold-800: #7c3a0a;
+
+  /* Color — Neutral base */
+  --primitive-neutral-0: #ffffff;
+  --primitive-neutral-50: #f8fafc;
+  --primitive-neutral-900: #0f172a;
+
+  /* Color — Status (form/system feedback) */
+  --primitive-red-600: #dc2626;
+
+  /* Typography — font families
+     Actual font loading happens via next/font in app/layout.tsx, which
+     injects --font-eb-garamond / --font-noto-serif-jp / --font-lato /
+     --font-noto-sans-jp on <html>. These primitives just compose the
+     fallback stacks; they resolve to nothing until layout.tsx is rendered. */
+  --primitive-font-serif: var(--font-eb-garamond), var(--font-noto-serif-jp), serif;
+  --primitive-font-sans: var(--font-lato), var(--font-noto-sans-jp), sans-serif;
+
+  /* Typography — type scale (min body size 16px per brief) */
+  --primitive-text-xs: 0.875rem;   /* 14px — labels/captions only, never body */
+  --primitive-text-sm: 1rem;       /* 16px */
+  --primitive-text-base: 1rem;     /* 16px */
+  --primitive-text-md: 1.125rem;   /* 18px */
+  --primitive-text-lg: 1.25rem;    /* 20px */
+  --primitive-text-xl: 1.5rem;     /* 24px */
+  --primitive-text-2xl: 1.75rem;   /* 28px */
+  --primitive-text-3xl: 2rem;      /* 32px */
+  --primitive-text-4xl: 2.5rem;    /* 40px */
+  --primitive-text-5xl: 3rem;      /* 48px */
+  --primitive-text-6xl: 3.5rem;    /* 56px */
+
+  /* Typography — line height / letter spacing */
+  --primitive-leading-tight: 1.2;
+  --primitive-leading-snug: 1.4;
+  --primitive-leading-normal: 1.6;
+  --primitive-leading-relaxed: 1.8;
+  --primitive-tracking-tight: -0.01em;
+  --primitive-tracking-normal: 0em;
+  --primitive-tracking-wide: 0.02em;
+  --primitive-tracking-wider: 0.04em;
+
+  /* Spacing — 8px grid */
+  --primitive-space-1: 0.25rem;  /* 4px */
+  --primitive-space-2: 0.5rem;   /* 8px */
+  --primitive-space-3: 1rem;     /* 16px */
+  --primitive-space-4: 1.5rem;   /* 24px */
+  --primitive-space-5: 2rem;     /* 32px */
+  --primitive-space-6: 3rem;     /* 48px */
+  --primitive-space-7: 4rem;     /* 64px */
+  --primitive-space-8: 6rem;     /* 96px */
+  --primitive-space-9: 8rem;     /* 128px */
+  --primitive-space-10: 10rem;   /* 160px */
+
+  /* Radius — minimal rounding to keep a formal, non-casual feel */
+  --primitive-radius-none: 0;
+  --primitive-radius-sm: 0.125rem;
+  --primitive-radius-md: 0.25rem;
+  --primitive-radius-lg: 0.5rem;
+
+  /* ------------------------------------------------------------------
+     Layer 2: SEMANTIC — role-based tokens, reference primitives only
+     ------------------------------------------------------------------ */
+
+  /* Color roles */
+  --semantic-color-background: var(--primitive-neutral-50);
+  --semantic-color-surface: var(--primitive-neutral-0);
+  --semantic-color-foreground: var(--primitive-neutral-900);
+  --semantic-color-muted-foreground: var(--primitive-charcoal-400);
+  --semantic-color-border: var(--primitive-charcoal-200);
+
+  --semantic-color-primary: var(--primitive-navy-700);
+  --semantic-color-primary-foreground: var(--primitive-neutral-0);
+  --semantic-color-secondary: var(--primitive-charcoal-800);
+  --semantic-color-secondary-foreground: var(--primitive-neutral-0);
+  --semantic-color-accent: var(--primitive-gold-600);
+  --semantic-color-accent-foreground: var(--primitive-neutral-0);
+
+  --semantic-color-ring: var(--primitive-navy-700);
+  --semantic-color-destructive: var(--primitive-red-600);
+  --semantic-color-destructive-foreground: var(--primitive-neutral-0);
+
+  /* Typography roles */
+  --semantic-font-heading: var(--primitive-font-serif);
+  --semantic-font-body: var(--primitive-font-sans);
+
+  --semantic-text-body-size: var(--primitive-text-base);
+  --semantic-text-body-leading: var(--primitive-leading-relaxed);
+  --semantic-text-caption-size: var(--primitive-text-sm);
+  --semantic-text-caption-leading: var(--primitive-leading-normal);
+  --semantic-text-heading-leading: var(--primitive-leading-tight);
+  --semantic-text-heading-tracking: var(--primitive-tracking-wide);
+
+  /* Spacing roles */
+  --semantic-space-section-y: var(--primitive-space-8);   /* 96px between major sections */
+  --semantic-space-content-gap: var(--primitive-space-5); /* 32px between related blocks */
+  --semantic-space-inline-gap: var(--primitive-space-3);  /* 16px between inline elements */
+  --semantic-content-max-width: 75rem;                    /* 1200px content column */
+
+  /* ------------------------------------------------------------------
+     Layer 3: COMPONENT — component-specific, reference semantic only
+     ------------------------------------------------------------------ */
+
+  /* Button */
+  --component-button-bg: var(--semantic-color-primary);
+  --component-button-fg: var(--semantic-color-primary-foreground);
+  --component-button-radius: var(--primitive-radius-sm);
+  --component-button-padding-x: var(--primitive-space-4);
+  --component-button-padding-y: var(--primitive-space-3);
+
+  /* Card (e.g. service / achievement blocks) */
+  --component-card-bg: var(--semantic-color-surface);
+  --component-card-border: var(--semantic-color-border);
+  --component-card-radius: var(--primitive-radius-md);
+  --component-card-padding: var(--primitive-space-5);
+
+  /* Navigation header */
+  --component-nav-bg: var(--semantic-color-background);
+  --component-nav-fg: var(--semantic-color-foreground);
+  --component-nav-height: 5rem;
+
+  /* Footer */
+  --component-footer-bg: var(--semantic-color-secondary);
+  --component-footer-fg: var(--semantic-color-secondary-foreground);
+
+  /* Hero — dark media background, so text needs light tints of the
+     brand families rather than the base navy/gold used on light surfaces */
+  --component-hero-padding-y: var(--primitive-space-9);
+  --component-hero-title-color: var(--primitive-navy-50);
+  --component-hero-eyebrow-color: var(--primitive-gold-100);
+
+  /* Form input (contact form) */
+  --component-input-border: var(--semantic-color-border);
+  --component-input-focus-ring: var(--semantic-color-ring);
+  --component-input-radius: var(--primitive-radius-sm);
 }
 
+/* ==========================================================================
+   Tailwind theme mapping
+   Only semantic + component tokens are exposed as utilities
+   (e.g. bg-primary, text-foreground, font-heading, gap-content).
+   Primitive layer stays internal — never referenced directly in markup.
+   ========================================================================== */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-background: var(--semantic-color-background);
+  --color-surface: var(--semantic-color-surface);
+  --color-foreground: var(--semantic-color-foreground);
+  --color-muted-foreground: var(--semantic-color-muted-foreground);
+  --color-border: var(--semantic-color-border);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: var(--semantic-color-primary);
+  --color-primary-foreground: var(--semantic-color-primary-foreground);
+  --color-secondary: var(--semantic-color-secondary);
+  --color-secondary-foreground: var(--semantic-color-secondary-foreground);
+  --color-accent: var(--semantic-color-accent);
+  --color-accent-foreground: var(--semantic-color-accent-foreground);
+  --color-ring: var(--semantic-color-ring);
+  --color-destructive: var(--semantic-color-destructive);
+  --color-destructive-foreground: var(--semantic-color-destructive-foreground);
+
+  --font-heading: var(--semantic-font-heading);
+  --font-body: var(--semantic-font-body);
+
+  --radius-button: var(--component-button-radius);
+  --radius-card: var(--component-card-radius);
+  --radius-input: var(--component-input-radius);
+
+  --color-hero-title: var(--component-hero-title-color);
+  --color-hero-eyebrow: var(--component-hero-eyebrow-color);
+
+  --spacing-section: var(--semantic-space-section-y);
+  --spacing-content-gap: var(--semantic-space-content-gap);
+  --spacing-inline-gap: var(--semantic-space-inline-gap);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--semantic-color-background);
+  color: var(--semantic-color-foreground);
+  font-family: var(--semantic-font-body);
+  font-size: var(--semantic-text-body-size);
+  line-height: var(--semantic-text-body-leading);
 }
