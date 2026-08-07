@@ -1,12 +1,16 @@
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
+import AmbientBackground from '@/components/layout/ambient-background';
 import CompanyOverview from '@/components/sections/company-overview';
+import NumbersHighlight from '@/components/sections/numbers-highlight';
 import Services from '@/components/sections/services';
 import CaseStudies from '@/components/sections/case-studies';
 import ContactCta from '@/components/sections/contact-cta';
 
 export default function Home() {
   return (
-    <>
+    <div className="relative">
+      <AmbientBackground />
+
       <ScrollExpandMedia
         mediaType="video"
         mediaSrc="/lumiere-hero.mp4"
@@ -66,9 +70,10 @@ export default function Home() {
       </ScrollExpandMedia>
 
       <CompanyOverview />
+      <NumbersHighlight />
       <Services />
       <CaseStudies />
       <ContactCta />
-    </>
+    </div>
   );
 }
