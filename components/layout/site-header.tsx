@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
@@ -18,12 +19,18 @@ const navLinks = [
 ];
 
 const Logo = () => (
-  // Placeholder wordmark — swap for <Image src="/logo.svg" ... /> when brand assets are ready.
-  <a
-    href="#top"
-    className="font-heading text-xl tracking-wide text-foreground"
-  >
-    Lumière
+  <a href="#top" className="flex items-center gap-2">
+    <Image
+      src="/lumiere-logo.png"
+      alt="株式会社Lumière ロゴ"
+      width={32}
+      height={32}
+      className="h-8 w-8"
+      priority
+    />
+    <span className="font-heading text-xl tracking-wide text-foreground">
+      Lumière
+    </span>
   </a>
 );
 
