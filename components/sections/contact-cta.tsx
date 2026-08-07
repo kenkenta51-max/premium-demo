@@ -1,3 +1,5 @@
+import { SECTION_PY_STRONG } from '@/lib/section-spacing';
+
 const fields = [
   { id: 'name', label: 'お名前', type: 'text', autoComplete: 'name' },
   {
@@ -11,9 +13,9 @@ const fields = [
 
 const ContactCta = () => {
   return (
-    <section id="contact" className="py-24 md:py-32 lg:py-40">
+    <section id="contact" className={SECTION_PY_STRONG}>
       <div className="mx-auto max-w-2xl px-6 text-center">
-        <h2 className="mb-6 font-heading text-3xl font-bold text-foreground md:text-4xl">
+        <h2 className="mb-6 font-body text-3xl font-bold tracking-tight text-foreground md:text-4xl">
           お問い合わせ
         </h2>
         <p className="mb-16 text-lg leading-relaxed text-muted-foreground">

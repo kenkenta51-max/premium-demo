@@ -1,25 +1,25 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Photo from '@/components/media/photo';
 import { works } from '@/lib/works-data';
 import { SECTION_PY_STANDARD } from '@/lib/section-spacing';
 
-const CaseStudies = () => {
-  return (
-    <section id="case-studies" className={`${SECTION_PY_STANDARD} bg-surface`}>
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="mb-16 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-          <h2 className="font-body text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            実績・導入事例
-          </h2>
-          <Link
-            href="/works"
-            className="text-sm font-medium text-primary transition-colors hover:text-accent"
-          >
-            事例一覧を見る →
-          </Link>
-        </div>
+export const metadata: Metadata = {
+  title: '実績・導入事例',
+  description:
+    '製造業、金融業、小売業における株式会社Lumièreの支援事例をご紹介します。',
+};
 
-        <div className="flex flex-col gap-16">
+export default function WorksPage() {
+  return (
+    <section className={SECTION_PY_STANDARD}>
+      <div className="mx-auto max-w-6xl px-6">
+        <p className="mb-4 text-sm font-medium text-accent">実績・導入事例</p>
+        <h1 className="max-w-2xl font-body text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+          業種を問わず、実行できる成果を。
+        </h1>
+
+        <div className="mt-16 flex flex-col gap-16">
           {works.map((work, index) => (
             <div
               key={work.slug}
@@ -36,9 +36,9 @@ const CaseStudies = () => {
                 <p className="text-sm font-medium text-accent">
                   {work.industry}
                 </p>
-                <h3 className="mt-2 font-body text-xl font-bold text-foreground">
+                <h2 className="mt-2 font-body text-2xl font-bold text-foreground">
                   {work.companyLabel}
-                </h3>
+                </h2>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">
                   {work.summary}
                 </p>
@@ -55,6 +55,4 @@ const CaseStudies = () => {
       </div>
     </section>
   );
-};
-
-export default CaseStudies;
+}

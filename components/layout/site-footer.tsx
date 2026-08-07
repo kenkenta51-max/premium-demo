@@ -1,8 +1,10 @@
+import Link from 'next/link';
+
 const sitemap = [
-  { label: '会社概要', href: '#about' },
-  { label: '事業内容', href: '#services' },
-  { label: '実績', href: '#case-studies' },
-  { label: 'お問い合わせ', href: '#contact' },
+  { label: '会社概要', href: '/about' },
+  { label: '事業内容', href: '/services' },
+  { label: '実績', href: '/works' },
+  { label: 'お問い合わせ', href: '/#contact' },
 ];
 
 const SiteFooter = () => {
@@ -10,7 +12,9 @@ const SiteFooter = () => {
     <footer className="bg-secondary py-16 text-secondary-foreground">
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="font-heading text-xl tracking-wide">Lumière</p>
+          <p className="font-body text-xl font-bold tracking-tight">
+            Lumière
+          </p>
           <p className="mt-3 text-sm text-secondary-foreground/70">
             株式会社Lumière
             <br />
@@ -20,13 +24,13 @@ const SiteFooter = () => {
 
         <nav className="flex flex-col gap-3 text-sm sm:flex-row sm:gap-8">
           {sitemap.map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
               className="text-secondary-foreground/80 transition-colors hover:text-secondary-foreground"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>
