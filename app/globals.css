@@ -39,6 +39,7 @@
   --primitive-neutral-0: #ffffff;
   --primitive-neutral-50: #f8fafc;
   --primitive-neutral-900: #0f172a;
+  --primitive-warm-white: #faf7f2; /* subtle warm off-white, editorial sections only */
 
   /* Color — Status (form/system feedback) */
   --primitive-red-600: #dc2626;
@@ -98,6 +99,7 @@
 
   /* Color roles */
   --semantic-color-background: var(--primitive-neutral-50);
+  --semantic-color-background-warm: var(--primitive-warm-white);
   --semantic-color-surface: var(--primitive-neutral-0);
   --semantic-color-foreground: var(--primitive-neutral-900);
   --semantic-color-muted-foreground: var(--primitive-charcoal-400);
@@ -184,6 +186,7 @@
    ========================================================================== */
 @theme inline {
   --color-background: var(--semantic-color-background);
+  --color-background-warm: var(--semantic-color-background-warm);
   --color-surface: var(--semantic-color-surface);
   --color-foreground: var(--semantic-color-foreground);
   --color-muted-foreground: var(--semantic-color-muted-foreground);
