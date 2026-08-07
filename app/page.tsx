@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <ScrollExpandMedia
       mediaType="video"
-      mediaSrc="https://videos.pexels.com/video-files/3196044/3196044-hd_1920_1080_25fps.mp4"
+      mediaSrc="/lumiere-hero.mp4"
       posterSrc="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1600"
       bgImageSrc="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=1920&auto=format&fit=crop"
       title="信頼を、形に。"
