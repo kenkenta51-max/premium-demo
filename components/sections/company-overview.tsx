@@ -48,6 +48,15 @@ const CompanyOverview = () => {
           </div>
         ))}
       </div>
+
+      <div className="mx-auto mt-10 max-w-6xl px-6">
+        <Link
+          href="/numbers"
+          className="inline-flex items-center text-sm font-medium text-primary transition-colors hover:text-accent"
+        >
+          数字で見るLumièreはこちら →
+        </Link>
+      </div>
     </section>
   );
 };
