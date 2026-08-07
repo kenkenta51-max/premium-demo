@@ -1,50 +1,44 @@
-import { Building2, TrendingUp, Users, Workflow } from 'lucide-react';
-
-const services = [
-  {
-    icon: TrendingUp,
-    title: '経営戦略コンサルティング',
-    description:
-      '事業環境の変化を見据え、実行可能な中長期の経営戦略を経営層とともに策定します。',
-  },
-  {
-    icon: Users,
-    title: '組織開発支援',
-    description:
-      '意思決定の速度と質を高める組織体制・人材配置を、現場の実情に即して設計します。',
-  },
-  {
-    icon: Workflow,
-    title: '業務プロセス改善',
-    description:
-      '非効率な業務フローを可視化し、持続的に改善できる仕組みへと再設計します。',
-  },
-  {
-    icon: Building2,
-    title: 'M&Aアドバイザリー',
-    description:
-      '事業承継や成長戦略としてのM&Aを、デューデリジェンスから統合後まで一貫して支援します。',
-  },
-];
+import Link from 'next/link';
+import Photo from '@/components/media/photo';
+import { services } from '@/lib/services-data';
+import { SECTION_PY_STANDARD } from '@/lib/section-spacing';
 
 const Services = () => {
   return (
-    <section id="services" className="py-24 md:py-32 lg:py-40">
+    <section id="services" className={SECTION_PY_STANDARD}>
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="mb-16 text-center font-heading text-3xl font-bold text-foreground md:text-4xl">
-          事業内容
-        </h2>
+        <div className="mb-16 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <h2 className="font-body text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            事業内容
+          </h2>
+          <Link
+            href="/services"
+            className="text-sm font-medium text-primary transition-colors hover:text-accent"
+          >
+            事業内容一覧を見る →
+          </Link>
+        </div>
 
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map(({ icon: Icon, title, description }) => (
-            <div key={title} className="flex flex-col items-start">
-              <Icon strokeWidth={1.25} className="mb-5 size-8 text-primary" />
-              <h3 className="mb-3 font-heading text-lg font-semibold text-foreground">
-                {title}
+        <div className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2">
+          {services.map((service) => (
+            <div key={service.slug}>
+              <Photo
+                src={service.image}
+                alt={service.title}
+                ratio="aspect-[4/3]"
+              />
+              <h3 className="mt-5 font-body text-lg font-bold text-foreground">
+                {service.title}
               </h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {description}
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {service.summary}
               </p>
+              <Link
+                href={`/services/${service.slug}`}
+                className="mt-3 inline-flex text-sm font-medium text-primary transition-colors hover:text-accent"
+              >
+                詳しく見る →
+              </Link>
             </div>
           ))}
         </div>

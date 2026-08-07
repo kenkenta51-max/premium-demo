@@ -2,24 +2,19 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-
-const services = [
-  { label: '経営戦略コンサルティング', href: '#services' },
-  { label: '組織開発支援', href: '#services' },
-  { label: '業務プロセス改善', href: '#services' },
-  { label: 'M&Aアドバイザリー', href: '#services' },
-];
+import { services } from '@/lib/services-data';
 
 const navLinks = [
-  { label: '会社概要', href: '#about' },
-  { label: '実績', href: '#case-studies' },
-  { label: 'お問い合わせ', href: '#contact' },
+  { label: '会社概要', href: '/about' },
+  { label: '実績', href: '/works' },
+  { label: 'お問い合わせ', href: '/#contact' },
 ];
 
 const Logo = () => (
-  <a href="#top" className="flex items-center gap-2">
+  <Link href="/" className="flex items-center gap-2">
     <Image
       src="/lumiere-logo.png"
       alt="株式会社Lumière ロゴ"
@@ -28,10 +23,10 @@ const Logo = () => (
       className="h-8 w-8"
       priority
     />
-    <span className="font-heading text-xl tracking-wide text-foreground">
+    <span className="font-body text-xl font-bold tracking-tight text-foreground">
       Lumière
     </span>
-  </a>
+  </Link>
 );
 
 const ServicesDropdown = () => {
@@ -43,8 +38,8 @@ const ServicesDropdown = () => {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <button
-        type="button"
+      <Link
+        href="/services"
         className="flex items-center gap-1 text-sm text-foreground transition-colors hover:text-muted-foreground"
         aria-expanded={isOpen}
         aria-haspopup="menu"
@@ -57,7 +52,7 @@ const ServicesDropdown = () => {
             isOpen ? 'rotate-180' : ''
           }`}
         />
-      </button>
+      </Link>
 
       <AnimatePresence>
         {isOpen && (
@@ -67,17 +62,17 @@ const ServicesDropdown = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="absolute left-0 top-full mt-3 w-64 rounded-card border border-border bg-surface py-2 shadow-lg"
+            className="absolute left-0 top-full mt-3 w-64 rounded-card border border-border bg-surface py-2"
           >
             {services.map((service) => (
-              <li key={service.label} role="none">
-                <a
+              <li key={service.slug} role="none">
+                <Link
                   role="menuitem"
-                  href={service.href}
+                  href={`/services/${service.slug}`}
                   className="block px-4 py-2 text-sm text-foreground transition-colors hover:bg-background hover:text-primary"
                 >
-                  {service.label}
-                </a>
+                  {service.title}
+                </Link>
               </li>
             ))}
           </motion.ul>
@@ -106,25 +101,25 @@ const SiteHeader = () => {
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
         <Logo />
         <nav className="flex items-center gap-8">
-          <a
+          <Link
             href={navLinks[0].href}
             className="text-sm text-foreground transition-colors hover:text-muted-foreground"
           >
             {navLinks[0].label}
-          </a>
+          </Link>
           <ServicesDropdown />
-          <a
+          <Link
             href={navLinks[1].href}
             className="text-sm text-foreground transition-colors hover:text-muted-foreground"
           >
             {navLinks[1].label}
-          </a>
-          <a
+          </Link>
+          <Link
             href={navLinks[2].href}
             className="text-sm text-primary transition-colors hover:text-foreground"
           >
             {navLinks[2].label}
-          </a>
+          </Link>
         </nav>
       </div>
     </header>
