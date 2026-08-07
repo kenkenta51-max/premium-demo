@@ -167,6 +167,13 @@
   --component-input-border: var(--semantic-color-border);
   --component-input-focus-ring: var(--semantic-color-ring);
   --component-input-radius: var(--primitive-radius-sm);
+
+  /* Chart series (used on /numbers only — recharts needs raw color
+     values, referenced via var() directly rather than a Tailwind utility) */
+  --component-chart-color-1: var(--primitive-navy-700);
+  --component-chart-color-2: var(--primitive-navy-300);
+  --component-chart-color-3: var(--primitive-gold-600);
+  --component-chart-color-4: var(--primitive-charcoal-400);
 }
 
 /* ==========================================================================
